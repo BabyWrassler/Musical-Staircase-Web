@@ -1,12 +1,16 @@
 <html> 
 <head> 
-<title>Assign Notes to Treads</title> 
+<title>+++ Testing +++</title> 
 <link rel="stylesheet" type="text/css" href="keys.css">
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
 <script src="./jquery.js"></script>
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 <script type='text/javascript'>
 $(document).ready(function(){ 
-$("#scale_results").slideUp(); 
+//$("#scale_results").slideUp(); 
     $("#generate_button").click(function(e){ 
         e.preventDefault(); 
         ajax_generate(); 
@@ -22,6 +26,10 @@ $("#scale_results").slideUp();
         e.preventDefault(); 
         ajax_generate(); 
     }); 
+    $('form').click(function(e){ 
+        e.preventDefault(); 
+        ajax_generate(); 
+    }); 
 
 });
 
@@ -29,9 +37,9 @@ function ajax_generate(){
   $("#scale_results").show();
   var note_val=$("#tonic_note").val();
   var scale_val = $("#scale").val();
-  var starting_val=$("#starting_note").val();
+  var starting_val=$("#select-result").val();
   var tonic_val=$("#tonic").val();
-  console.log(scale_val);
+  console.log(starting_val);
   $.post("./generate.php", {scale : scale_val, tonic_note : note_val, tonic : tonic_val, starting_note : starting_val}, function(data){
    if (data.length>0){ 
      $("#scale_results").html(data); 
@@ -73,7 +81,13 @@ function ajax_generate(){
 
 <input type="submit" value="Generate Scale" id="generate_button" /> 
 </div> 
-
-    <div id="scale_results"></form></div> 
+</form>
+    <div id="scale_results"></div> 
+    
+<BR>
+<div class=\"div-mtable\">
+<div class=\"div-mtable-row\">
+</div>
+</div>
 </body> 
 </html>

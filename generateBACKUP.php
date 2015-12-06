@@ -88,20 +88,20 @@ for ($x=0; $x<140; $x++) {
 	
 
 
-//echo "<form method=\"post\"><select name=\"starting_note\" id=\"starting_note\">";
-//$index = 0;
-//foreach($scale_array as $value) {
- //   if ($value < 128) {
-//		echo "<option value=\"";
-//		echo $value;
-//		echo "\">";
-//		echo $value;
-//		echo "</option>";
-//	}
-//	$index++;
-//}
-//echo "</select></form><br><br>";
-echo "</form>";
+//echo "<form id=\"starting_form\" method=\"post\">";
+echo "<select name=\"starting_note\" id=\"starting_note\">";
+$index = 0;
+foreach($scale_array as $value) {
+    if ($value < 128) {
+		echo "<option value=\"";
+		echo $value;
+		echo "\">";
+		echo $value;
+		echo "</option>";
+	}
+	$index++;
+}
+echo "</select></form><br><br>";
 
 $tread_to_fill = 0;
 
@@ -134,89 +134,5 @@ while ($tread_to_fill < 32) {
 	echo "</div>";
 	$tread_to_fill++;
 }
-echo "</div><BR><BR>";
-
-?>
-
-<script>
-$(function() {
-$("#selectable").selectable({
-      selecting: function(event, ui){
-            if( $(".ui-selected, .ui-selecting").length > 1){
-                  $(ui.selecting).removeClass("ui-selecting");
-            }
-      }
-});
-});
-
-
-$(function() {
-	$( "#selectable" ).selectable({
-	  stop: function() {
-		var result = $( "#select-result" ).empty();
-		$( ".ui-selected", this ).each(function() {
-		  var index = $( "#selectable div" ).index( this );
-		  console.log(index);
-		  result.append( " #" + ( index + 1 ) );
-		});
-	  }
-	});
-});
-</script>
-
-<p id="feedback"><span>You've selected:</span> <span id="select-result">none</span>.</p>
-
-<div class="div-mtable">
-<div class="div-mtable-col">Octave</div>
-<div class="div-mtable-col">C</div>
-<div class="div-mtable-col">C#</div>
-<div class="div-mtable-col">D</div>
-<div class="div-mtable-col">D#</div>
-<div class="div-mtable-col">E</div>
-<div class="div-mtable-col">F</div>
-<div class="div-mtable-col">F#</div>
-<div class="div-mtable-col">G</div>
-<div class="div-mtable-col">G#</div>
-<div class="div-mtable-col">A</div>
-<div class="div-mtable-col">A#</div>
-<div class="div-mtable-col">B</div>
-</div>
-<BR>
-<div class="div-mtable" style="float:none">
-<div class="div-mtable-col">-2</div><br>
-<div class="div-mtable-col">-1</div><br>
-<div class="div-mtable-col">0</div><br>
-<div class="div-mtable-col">1</div><br>
-<div class="div-mtable-col">2</div><br>
-<div class="div-mtable-col">3</div><br>
-<div class="div-mtable-col">4</div><br>
-<div class="div-mtable-col">5</div><br>
-<div class="div-mtable-col">6</div><br>
-<div class="div-mtable-col">7</div><br>
-<div class="div-mtable-col">8</div>
-</div>
-
-
-<BR>
-
-<?php
-$m = 0;
-echo "<div id=\"selectable\">";
-for ($r = 0; $r < 11; $r++) {
-	//echo "<div id=\"selectable\" class=\"div-mtable-row\">";
-	//echo "<div class=\"div-mtable-col\">";
-	//echo ($r - 2);
-	//echo "</div>";
-	for ($c = 0; $c < 12; $c++) {
-		if ($m < 128) {
-			echo "<div class=\"div-mtable-col ui-selectable\">$m</div>";
-			$m++;
-		}
-	}
-	echo "<BR>";
-	//echo "</div>";
-}
 echo "</div>";
-echo "</div>";
-
 ?>
