@@ -131,6 +131,11 @@ function create_scale(){
 	var notes_in_scale = 0;
 
 	switch (scale) {
+	case "aeolian":
+		// Aeolian scale MIDI intervals {0, 2, 3, 5, 7, 8, 10}
+		scale_mask = [1,0,1,1,0,1,0,1,1,0,1,0];
+		notes_in_scale = 7;
+		break;
 	case "chromatic":
 		// Chromatic scale MIDI intervals {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}
 		scale_mask = [1,1,1,1,1,1,1,1,1,1,1,1];
@@ -160,7 +165,57 @@ function create_scale(){
 	case "indian":
 		// Indian Scale MIDI intervals {0, 1, 1, 4, 5, 8, 10}
 		scale_mask = [1,1,0,0,1,1,0,0,1,0,1,0]; // Skips the double 1
-		notes_in_scale = 6; // Should be 7
+		notes_in_scale = 6; // should be 7?
+		break;
+	case "diatonic_minor":
+		// MIDI intervals {0, 2, 3, 5, 7, 8, 10}
+		scale_mask = [1,0,1,1,0,1,0,1,1,0,1,0]; 
+		notes_in_scale = 7; 
+		break;
+	case "dorian":
+		// Indian Scale MIDI intervals {0, 2, 3, 5, 7, 9, 10}
+		scale_mask = [1,0,1,1,0,1,0,1,0,1,1,0]; 
+		notes_in_scale = 7; 
+		break;
+	case "locrian":
+		// Indian Scale MIDI intervals {0, 1, 3, 5, 6, 8, 10}
+		scale_mask = [1,1,0,1,0,1,1,0,1,0,1,0]; 
+		notes_in_scale = 7; 
+		break;
+	case "lydian":
+		// Indian Scale MIDI intervals {0, 2, 4, 6, 7, 9, 10}
+		scale_mask = [1,0,1,0,1,0,1,1,0,1,1,0]; 
+		notes_in_scale = 7; 
+		break;
+	case "melodic_minor":
+		// Scale MIDI intervals {0, 2, 3, 5, 7, 8, 9, 10, 11}
+		scale_mask = [1,0,1,1,0,1,0,1,1,1,1,1]; 
+		notes_in_scale = 9; 
+		break;
+	case "mixolydian":
+		// Indian Scale MIDI intervals {0, 2, 4, 5, 7, 9, 10}
+		scale_mask = [1,0,1,0,1,1,0,1,0,1,1,0]; 
+		notes_in_scale = 7; 
+		break;
+	case "natural_minor":
+		// Indian Scale MIDI intervals {0, 2, 3, 5, 7, 8, 10}
+		scale_mask = [1,0,1,1,0,1,0,1,1,0,1,0]; 
+		notes_in_scale = 7; 
+		break;
+	case "phrygian":
+		// Indian Scale MIDI intervals {0, 1, 3, 5, 7, 8, 10}
+		scale_mask = [1,1,0,1,0,1,0,1,1,0,1,0]; 
+		notes_in_scale = 7; 
+		break;
+	case "harmonic_minor":
+		// Indian Scale MIDI intervals {0, 2, 3, 5, 7, 8, 11}
+		scale_mask = [1,0,1,1,0,1,0,1,1,0,0,1];
+		notes_in_scale = 7; 
+		break;
+	case "turkish":
+		// Indian Scale MIDI intervals {0, 1, 3, 5, 7, 10, 11}
+		scale_mask = [1,1,0,1,0,1,0,1,0,0,1,1]; 
+		notes_in_scale = 7; 
 		break;
 	default:
 		scale_mask = [1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1]; // Major
@@ -400,7 +455,7 @@ table_string += "</div><BR><BR>";
 	//var jsonTreads = JSON.stringify(prepTreads);
 	//console.log(jsonTreads);
 	
-	$.post('conntest.php', objTreads, function(data){	 
+	$.post('postNotes.php', objTreads, function(data){	 
 		// show the response
 		$('#response').html(data);
 	}).fail(function() {
@@ -443,6 +498,17 @@ function myFunction(response) {
         	<option value="pentatonic">Pentatonic</option>
         	<option value="indian">Indian</option>
         	<option value="chromatic">Chromatic</option>
+        	<option value="aeolian">Chromatic</option>
+        	<option value="diatonic_minor">Diatonic Minor</option>
+        	<option value="dorian">Dorian</option>
+        	<option value="harmonic_minor">Harmonic Minor</option>
+        	<option value="locrian">Locrian</option>
+        	<option value="lydian">Lydian</option>
+        	<option value="melodic_minor">Melodic Minor</option>
+        	<option value="mixolydian">Mixolydian</option>
+        	<option value="natural_minor">Natural Minor</option>
+        	<option value="phrygian">Phryrian</option>
+        	<option value="turkish">Turkish</option>
         </select>
         <select name="tonic" id="tonic">
         	<option value="0">C</option>
@@ -618,7 +684,7 @@ echo "</div><BR><BR>";
 <?php
 //<p id="feedback"><span id="scale_table">none</span><span id="chosen_tonic">none</span><span id="chosen_scale">none</span><span id="chosen_starting">none</span></p>
 ?>
-<h2>Choose a scale:</h2>
+<span class="scale-label"><h2>Step 1 - Choose a scale:</h2></span>
 <div class="div-scale-table">
 	<div onclick="chooseScale(this)" class="scale-choice chosen" value="major">Major</div>
 	<div onclick="chooseScale(this)" class="scale-choice" value="minor">Minor</div>
@@ -626,11 +692,22 @@ echo "</div><BR><BR>";
 	<div onclick="chooseScale(this)" class="scale-choice" value="indian">Indian</div>
 	<div onclick="chooseScale(this)" class="scale-choice" value="pentatonic">Pentatonic</div>
 	<div onclick="chooseScale(this)" class="scale-choice" value="chromatic">Chromatic</div>
+	<div onclick="chooseScale(this)" class="scale-choice" value="aeolian" style="display:none;">Aeolian</div>
+	<div onclick="chooseScale(this)" class="scale-choice" value="diatonic_minor">Aeolian/Diatonic Minor</div>
+	<div onclick="chooseScale(this)" class="scale-choice" value="dorian">Dorian</div>
+	<div onclick="chooseScale(this)" class="scale-choice" value="harmonic_minor">Harmonic Minor</div>
+	<div onclick="chooseScale(this)" class="scale-choice" value="locrian">Locrian</div>
+	<div onclick="chooseScale(this)" class="scale-choice" value="lydian">Lydian</div>
+	<div onclick="chooseScale(this)" class="scale-choice" value="melodic_minor">Melodic Minor</div>
+	<div onclick="chooseScale(this)" class="scale-choice" value="mixolydian">Mixolydian</div>
+	<div onclick="chooseScale(this)" class="scale-choice" value="natural_minor">Natural Minor</div>
+	<div onclick="chooseScale(this)" class="scale-choice" value="phrygian">Phryrian</div>
+	<div onclick="chooseScale(this)" class="scale-choice" value="turkish">Turkish</div>
 </div>
 
-<h2>Choose a tonic note and starting note:</h2>
+<span class="tonic-label"><h2>Step 2 - Choose a tonic note:</h2></span>
 <div class="div-octave-table">
-<div class="div-octave-col">Octave</div><br>
+<div class="div-octave-col">Oct</div><br>
 <div class="div-octave-col">-2</div><br>
 <div class="div-octave-col">-1</div><br>
 <div class="div-octave-col">0</div><br>
@@ -660,7 +737,7 @@ echo "</div><BR><BR>";
 <div onclick="chooseTonic(this)" value="11" name="G" class="div-alpha-table-col">B</div>
 </div>
 
-
+<h2 class="note-label"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Step 3 - Choose an<br><span class="available-text">available</span> starting note<BR>from the highlighted scale</h2>
 <div class="div-note-table">
 
 <?php

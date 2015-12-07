@@ -34,6 +34,25 @@ div {
   width:726px;
 }
 
+.note-label {
+	float: right;
+	clear: none;
+	position: relative;
+	left: -200px;
+	top: 60px;
+	line-height: 140%;
+}
+
+.tonic-label {
+	position: relative;
+	left: 10px;
+}
+
+.scale-label {
+	position: relative;
+	left: 10px;
+}
+
 .div-mtable{
   display:table;         
   width:auto;         
@@ -113,8 +132,8 @@ div {
   float:left;/*fix for  buggy browsers*/
   /*display: inline-block;*/
   /*display:table-column;*/         
-  width:80px;         
-  /*background-color:#E2F1FF;*/  
+  width:44px;         
+  background-color:#E2F1FF;
   padding-left:5px;
   padding-right:5px;
   margin-left:2px;
@@ -124,13 +143,14 @@ div {
 	line-height: 1em; /* Keep small!!!! */
 	text-align:right;
 	font-weight: bold;
+	
 
   /*border-bottom:1px solid  #666666; */
 }
 
 .div-scale-table {
   display:table;         
-  width:auto;         
+  width:800px;         
 	background-color: white;        
   /*border-left:1px solid  #666666;  
   border-right:1px solid  #666666;*/
@@ -143,6 +163,7 @@ div {
   padding-left: 6px;
   padding-right: 6px;
   line-height: 1em;
+  font-weight: bold;
 }
 
 .scale-choice {
@@ -157,12 +178,16 @@ div {
   padding-right:5px;
   padding-top:5px;
   padding-bottom:5px;
-  margin-left:2px;
+  margin-left:0px;
   margin-right:10px;
-  margin-top:0px;
-  margin-bottom:4px;
+  margin-top:10px;
+  margin-bottom:0px;
   line-height: 1em; /* Keep small!!!!! */
   clear:none;
+}
+
+.available-text {
+	border:2px dashed gray;
 }
 
 .chosen {
