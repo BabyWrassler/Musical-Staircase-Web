@@ -43,19 +43,18 @@ div {
 }
 
 .tonic-label {
-	float: left;
+	/*float: left;
 	clear: none;
-	position: relative;
+	position: relative;*/
 	/*left: -310px;*/
-	display:block;
 	font-weight: bold;
 }
 
 .note-label {
-	float: right;
+	/*float: right;
 	position: relative;
 	top: -200px;
-	left: -350px;
+	left: -350px;*/
 	line-height: 150%;
 	font-weight: bold;
 }
