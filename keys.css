@@ -8,6 +8,12 @@ div {
 	padding:0px;
 }
 
+.page-title {
+	background-color:#eee
+	padding:10px;
+	text-align: center;
+}
+
 .div-table{
   display:table;         
   width:auto;         
@@ -16,11 +22,13 @@ div {
   border-spacing:5px;/*cellspacing:poor IE support for  this*/
   float:left;
 }
+
 .div-table-row{
   display:table-row;
   width:auto;
   clear:both;
 }
+
 .div-table-col{
   float:left;/*fix for  buggy browsers*/
   display:table-column;         
@@ -34,23 +42,28 @@ div {
   width:726px;
 }
 
-.note-label {
-	float: right;
+.tonic-label {
+	float: left;
 	clear: none;
 	position: relative;
-	left: -200px;
-	top: 60px;
-	line-height: 140%;
+	/*left: -310px;*/
+	display:block;
+	font-weight: bold;
 }
 
-.tonic-label {
+.note-label {
+	float: right;
 	position: relative;
-	left: 10px;
+	top: -200px;
+	left: -350px;
+	line-height: 150%;
+	font-weight: bold;
 }
 
 .scale-label {
 	position: relative;
-	left: 10px;
+	font-weight: bold;
+	margin-left:18px;
 }
 
 .div-mtable{
@@ -133,10 +146,10 @@ div {
   /*display: inline-block;*/
   /*display:table-column;*/         
   width:44px;         
-  background-color:#E2F1FF;
+  /*background-color:#E2F1FF;*/
   padding-left:5px;
   padding-right:5px;
-  margin-left:2px;
+  margin-left:0px;
   margin-right:2px;
   margin-top:4px;
   margin-bottom:4px;
@@ -157,7 +170,7 @@ div {
   border-spacing:0px;/*cellspacing:poor IE support for  this*/
   float: none;
   clear: none;
-  margin: 6px;
+  margin-left: 10px;
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 6px;
@@ -195,12 +208,10 @@ div {
 	border:2px solid black;
 }
 
-
 .scale {
 	background: #E2F1FF;
 	
 }
-
 
 .avail-start {
 	border: 2px solid black;
@@ -217,7 +228,7 @@ div {
 }
 
 form {
-	display:none;
+	display:inline;
 }
 
 #scale {

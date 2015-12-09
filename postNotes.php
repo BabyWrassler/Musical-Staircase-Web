@@ -9,7 +9,7 @@ $inData = $_POST;
 $delSql = "DELETE FROM treads;";
 $sql = "INSERT INTO treads (id, midi) VALUES ";
 
-for ($i=0; $i < 31; $i++) {
+for ($i=0; $i < 32; $i++) {
 	//print_r("Test:");
 	$g = "i" . $i;
 	$h = $inData[$g];
@@ -21,20 +21,6 @@ for ($i=0; $i < 31; $i++) {
 	//print_r($h);
 	$sql .= "('$i', '$h');";
 
-/*
-for ($i=0; $i < 31; $i++) {
-	//print_r("Test:");
-	$g = "i" . $i;
-	$h = $inData[$g];
-	print_r($h);
-	$sqlString = $sqlString ."'".$h."', ";
-}
-//$i++;
-$g = "i" . $i;
-$h = $inData[$g];
-print_r($h);
-$sqlString = $sqlString ."'".$h."'";
-print_r($sqlString);*/
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

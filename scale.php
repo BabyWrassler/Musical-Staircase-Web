@@ -24,8 +24,6 @@ function chooseStarting(nn) {
     create_scale();
 }
 
-
-
 function chooseTonic(elmnt) {
     $('.div-alpha-table-col.chosen').removeClass("chosen");
     elmnt.classList.add("chosen");
@@ -74,10 +72,10 @@ create_scale();
         e.preventDefault();
         create_scale();
         //ajax_generate(); $("#scale").val();
-    }); 
+    });
     $('form').click(function(e){ 
         e.preventDefault();
-        create_scale();
+        //create_scale();
         //ajax_generate(); 
     }); 
     $("#scale").change(function(e){ 
@@ -220,14 +218,7 @@ function create_scale(){
 	default:
 		scale_mask = [1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1]; // Major
 		notes_in_scale = 7;
-		//maxStartNote = 62;
 	}
-	
-	/*var ii;
-	for (ii=0; ii>12; ii++) {
-		var log = scale_mask[ii];
-		//console.log(log);
-	}*/
 	
 	var treads = [];
 	var scale_array = [];
@@ -260,44 +251,7 @@ function create_scale(){
 	}
 }
 
-/*for (var x=0; x<12; x++) {
-	scale_array.shift();
-}*/
-
 var x=0;
-
-
-/*
-for (x=0; x<scale_array.length; x++) {
-	var see = x + " : " + scale_array[x];
-	console.log(see);
-	
-}*/
-
-/*
-for (x=0; x<128; x++) {
-	//var dest = scale_array[(x)];
-	//var src = (scale_array[x + notes_in_scale] -12); // was -12
-	//var tmp = (dest.toString()).concat(" = ");
-	//tmp = tmp.concat(src);
-	//console.log(tmp);
-	var tmp = (scale_array[x + (notes_in_scale)] - 12)
-	//console.log(tmp);
-
-	//if (tmp<127) {
-		if ((Number.isInteger(tmp)) && (tmp<128)) {
-			if (tmp > -1) {
-				scale_array[x] = tmp;
-				//console.log("Is number");
-				//console.log(tmp);
-			} else {
-				scale_array.splice(x,1);
-				//scale_array.shift();
-				//console.log("splice");
-			}
-		}
-	//}
-}*/
 
 for (x=0; x<128; x++) {
 	var tmp = (scale_array[x + (notes_in_scale)] - 12)
@@ -382,42 +336,24 @@ table_string += "</div><BR><BR>";
 	
 	var w=0;
 	var n=0;
-	
-	/*$('.avail-start').removeClass("avail-start");
-	for(w=0; w<treads.length; w++) {
-		n = treads[w];
-		//if((n > -1) && (n < 128)) {
-			$noteDiv = $("[name='" + treads[w] + "']")[0];
-			//$noteDiv.setAttribute("scale_index", w);
-			$noteDiv.classList.add("avail-start");
-			$noteDiv.setAttribute("onclick", "chooseStarting(this)");
-		//}
-	}*/
-	
-	
+		
 	$('.scale').removeClass("scale");
 	$('.avail-start').removeClass("avail-start");
 	
-	//maxStartNote = scale_array.indexOf(127);
 	var scale_array = scale_array.filter(underOneTwoEight);
 	//console.log(scale_array);
 	var max = Math.max.apply( Math, scale_array );
 	//console.log(max);
-    //maxStartNote = scale_array.indexOf(Math.max.apply( Math, scale_array )) - 31;
-    //maxStartNote = (Math.max.apply( Math, scale_array ));
     maxStartNote = scale_array.length - 32;
     //console.log(maxStartNote);
     
 	for(w=0; w<scale_array.length; w++) {
 		//n = scale_array[w];
-		//if((n > -1) && (n < 128)) {
 			$noteDiv = $("[name='" + scale_array[w] + "']")[0];
 			$noteDiv.setAttribute("scale_index", w);
 			$noteDiv.classList.add("scale");
-			//$noteDiv.setAttribute("onclick", "chooseStarting(this)");
 			if (w <= maxStartNote) {
 				$noteDiv.classList.add("avail-start");
-//				$noteDiv.setAttribute("onclick", 'chooseStarting(this)');
 				$noteDiv.setAttribute("onclick", 'chooseStarting("' + w + '")');
 			} else {
 				$noteDiv.setAttribute("onclick", null);
@@ -443,17 +379,14 @@ table_string += "</div><BR><BR>";
 	prepTreads += '" ]';
 	console.log("done");
 	
-	prepTreads = {"0": "1", "1": "2"};
-
 	var objTreads = {};
 	for (t=0; t<treads.length; t++) {
 		objTreads[("i" + t)] = treads[t];
 	}
+	objTreads["i32"] = parseInt($("#instrument").val());;
+	
 	console.log(objTreads);
 	
-	//var jsonTreads = JSON.stringify(treads);
-	//var jsonTreads = JSON.stringify(prepTreads);
-	//console.log(jsonTreads);
 	
 	$.post('postNotes.php', objTreads, function(data){	 
 		// show the response
@@ -531,13 +464,18 @@ function myFunction(response) {
 	}
 ?>
 		</select>
+<select name="instrument" id="instrument">	
+<?php
+	$instNames = ["Analog Saw Bass", "Boffner Bass", "Smoked Analog Bass", "Grand Piano", "Strangler Lead", "African Bars", "Street Bells", "Wobble Bass", "Brassinski", "Silk Horns"];
+	$instLimit = count($instNames);
+	for($iii=0; $iii < $instLimit; $iii++) {
+		echo"<option value=\"$iii\">$instNames[$iii]</option>";
+	}
+?>
+</select>
 <input type="submit" value="Generate Scale" id="generate_button" /> 
 </div> 
 </form>
-
-<div id="scale_results"> </div> 
- 
- 
  
  <?php
 /*
@@ -770,6 +708,7 @@ for ($r = 0; $r < 11; $r++) {
 <div class=\"div-mtable-row\">
 </div>
 </div>
+
 
 <div id='response'></div>
 </body> 
