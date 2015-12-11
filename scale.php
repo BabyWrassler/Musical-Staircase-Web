@@ -24,6 +24,16 @@ function chooseTonic(elmnt) {
     create_scale();
 }
 
+function chooseInst(elmnt) {
+    //elmnt.style.color = 'white';
+    $('.inst-choice.chosen').removeClass("chosen");
+    elmnt.classList.add("chosen");
+    var value = $(elmnt).attr('value');
+    $("#instrument").val(value);
+    //$("#starting").val(0);
+    create_scale();
+}
+
 function chooseScale(elmnt) {
     //elmnt.style.color = 'white';
     $('.scale-choice.chosen').removeClass("chosen");
@@ -64,7 +74,6 @@ $(document).ready(function(){
         $("#starting").val(0);
         create_scale();
     }); 
-
 });
 
 // Filter for scale_array to make sure bad values go through
@@ -333,7 +342,10 @@ function myFunction(response) {
 
 <body> 
 <h1 class="page-title"><span class="glyphicon glyphicon-music"></span> StepNotes Control Panel <span class="glyphicon glyphicon-music"></span></h1> 
-    <form id="scale_form" method="post"> 
+<br>
+<div class="left-half">
+
+<form id="scale_form" method="post"> 
 <div> 
         <select name="scale" id="scale" >
         	<option value="major">Major</option>
@@ -388,7 +400,6 @@ function myFunction(response) {
 </div> 
 </form>
  
-<br>
 <span class="scale-label">Choose a scale<span class="glyphicon glyphicon-arrow-down" style="position:relative; top:10px; display:none;"></span></span>
 <div class="div-scale-table">
 	<div onclick="chooseScale(this)" class="scale-choice chosen" value="major">Major</div>
@@ -409,12 +420,13 @@ function myFunction(response) {
 	<div onclick="chooseScale(this)" class="scale-choice" value="phrygian">Phryrian</div>
 	<div onclick="chooseScale(this)" class="scale-choice" value="turkish">Turkish</div>
 </div>
+
 <br>
 
 <span class="tonic-label">Choose a tonic note</span>
 <span class="note-label">and then choose an <span class="available-text">available</span> starting note</span>
 <br>
-<br>
+
 <div class="div-octave-table">
 <div class="div-octave-col">Oct</div><br>
 <div class="div-octave-col">-2</div><br>
@@ -466,7 +478,21 @@ for ($r = 0; $r < 11; $r++) {
 ?>
 </div>
 </div>
-    
+
+</div>
+<div class="right-half">
+<span class="inst-label">Choose an Instrument</span>
+<div class="div-inst-table">
+<?php
+$rLimit = count($instNames);
+for ($r = 0; $r < $rLimit; $r++) {
+	echo "<div onclick=\"chooseInst(this)\" class=\"inst-choice\" value=\"$r\">";
+	echo $instNames[$r];
+	echo "</div>";
+}
+?>
+</div>
+</div>
 <BR>
 <div id='response'></div>
 </body> 

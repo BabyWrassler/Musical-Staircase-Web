@@ -9,7 +9,7 @@ div {
 }
 
 .page-title {
-	background-color:#eee
+	background-color:white;
 	padding:10px;
 	text-align: center;
 }
@@ -44,25 +44,32 @@ div {
 
 .tonic-label {
 	/*float: left;
-	clear: none;
-	position: relative;*/
+	clear: none;	
 	/*left: -310px;*/
+	position: relative;
 	font-weight: bold;
+	margin-left:12px;
 }
 
 .note-label {
-	/*float: right;
-	position: relative;
+	/*float: right;	
 	top: -200px;
 	left: -350px;*/
-	line-height: 150%;
+	position: relative;
+	line-height: 100%;
 	font-weight: bold;
 }
 
 .scale-label {
 	position: relative;
 	font-weight: bold;
-	margin-left:18px;
+	margin-left:15px;
+}
+
+.inst-label {
+	position: relative;
+	font-weight: bold;
+	margin-left:15px;
 }
 
 .div-mtable{
@@ -178,6 +185,43 @@ div {
   font-weight: bold;
 }
 
+.div-inst-table {
+  display:table;         
+  width:400px;         
+  background-color: white;        
+  /*border-left:1px solid  #666666;  
+  border-right:1px solid  #666666;*/
+  border-spacing:0px;/*cellspacing:poor IE support for  this*/
+  float: none;
+  margin-left: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 6px;
+  padding-right: 6px;
+  line-height: 1em;
+  font-weight: bold;
+}
+
+.inst-choice {
+  float:left;/*fix for  buggy browsers*/
+  display:table-column;         
+  /*display:inline-block;   
+  vertical-align: bottom;     
+  width:30px; */        
+  background-color:#E2F1FF;  
+  border:2px dashed gray;
+  padding-left:5px;
+  padding-right:5px;
+  padding-top:5px;
+  padding-bottom:5px;
+  margin-left:0px;
+  margin-right:10px;
+  margin-top:10px;
+  margin-bottom:0px;
+  line-height: 1em; /* Keep small!!!!! */
+  clear:none;
+}
+
 .scale-choice {
   float:left;/*fix for  buggy browsers*/
   display:table-column;         
@@ -196,6 +240,14 @@ div {
   margin-bottom:0px;
   line-height: 1em; /* Keep small!!!!! */
   clear:none;
+}
+
+.left-half {
+	float:left;
+}
+
+.right-half {
+	float:left;
 }
 
 .available-text {
@@ -227,7 +279,7 @@ div {
 }
 
 form {
-	display:inline;
+	display:none;
 }
 
 #scale {
